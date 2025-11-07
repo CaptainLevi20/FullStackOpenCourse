@@ -1,5 +1,6 @@
-Exercise 4:
+## Exercise 4:
 
+```mermaid
 sequenceDiagram
     participant browser
     participant server
@@ -36,9 +37,11 @@ sequenceDiagram
     deactivate server
 
     Note right of browser: The browser executes the callback function that renders the updated list of notes
+```
 
-Exercise 5:
+## Exercise 5:
 
+```mermaid
 sequenceDiagram
     participant browser
     participant server
@@ -66,9 +69,11 @@ sequenceDiagram
     deactivate server
 
     Note right of browser: The JavaScript code renders the notes dynamically on the page without reloading
+```
 
-Exercise 6:
+## Exercise 6:
 
+```mermaid
 sequenceDiagram
     participant browser
     participant server
@@ -83,3 +88,4 @@ sequenceDiagram
     deactivate server
 
     Note right of browser: The browser updates the local notes list and re-renders it<br>without reloading the page
+```
