@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
-import axios from "axios";
+
+import entryService from "./services/entryService";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -13,19 +15,52 @@ const App = () => {
   function submitForm(e) {
     e.preventDefault();
     if (!persons.some((person) => person.name === newName)) {
-      setPersons((prevState) => {
-        return [...prevState, { name: newName, number: newNumber }];
-      });
+      entryService
+        .createPerson({
+          name: newName,
+          number: newNumber,
+        })
+        .then((response) => {
+          setPersons([...persons, response]);
+        });
       setNewName("");
       setNewNumber("");
     } else {
-      alert(`${newName} is already added to Phonebook`);
+      if (
+        window.confirm(
+          `${newName} is already added, do you want to replace the old number with a new one?`
+        )
+      ) {
+        const personObj = persons.find((person) => person.name === newName);
+        const changedPerson = { ...personObj, number: newNumber };
+
+        entryService
+          .updatePerson(personObj.id, changedPerson)
+          .then((response) => {
+            setPersons(
+              persons.map((person) =>
+                person.id !== personObj.id ? person : response
+              )
+            );
+          });
+      }
+    }
+  }
+
+  function deletePerson(personName) {
+    if (window.confirm(`Are you sure you want to delete ${personName}`)) {
+      const personObj = persons.find((person) => person.name === personName);
+      entryService.deletePerson(personObj.id, personObj).then((response) => {
+        setPersons((prevState) => {
+          return prevState.filter((person) => person.id !== personObj.id);
+        });
+      });
     }
   }
 
   useEffect(() => {
-    axios.get("http://localhost:3001/persons").then((response) => {
-      setPersons(response.data);
+    entryService.getAll().then((response) => {
+      setPersons(response);
     });
   }, []);
 
@@ -42,7 +77,7 @@ const App = () => {
         setNewNumber={setNewNumber}
       />
       <h3>Numbers</h3>
-      <Persons persons={persons} />
+      <Persons persons={persons} deletePerson={deletePerson} />
     </div>
   );
 };
