@@ -1,0 +1,23 @@
+GET http://localhost:3000/api/persons
+
+### 
+GET http://localhost:3000/info
+
+###
+
+GET http://localhost:3000/api/persons/5
+
+
+###
+
+DELETE http://localhost:3000/api/persons/4
+
+###
+POST http://localhost:3000/api/persons
+Content-Type: application/json
+
+{
+    "name": "Andrés Ulloa",
+	"number": "20-10-2001",
+    "important": true
+}

@@ -1,2 +1,1 @@
-"# FullStackOpenCourse" 
-https://github.com/jarvensivu/full-stack-open
+"# Desarrollo Ejercicios FullStackOpen Course"
