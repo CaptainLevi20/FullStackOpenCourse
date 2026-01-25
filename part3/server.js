@@ -1,6 +1,20 @@
 const express = require("express");
-const app = express();
 const morgan = require("morgan");
+const app = express();
+const cors = require("cors");
+
+app.use(cors());
+app.use(express.json());
+
+morgan.token("post", (req) => {
+  return req.method === "POST" ? JSON.stringify(req.body) : " ";
+});
+
+app.use(
+  morgan(":method :url :status :res[content-length] - :response-time ms :post"),
+);
+
+app.use(express.static("dist"));
 
 let persons = [
   {
@@ -25,74 +39,71 @@ let persons = [
   },
 ];
 
-app.use(express.json());
-app.use(
-  morgan((tokens, req, res) => {
-    return [
-      tokens.method(req, res),
-      tokens.url(req, res),
-      tokens.status(req, res),
-      tokens.res(req, res, "content-length"),
-      "-",
-      tokens["response-time"](req, res),
-      "ms",
-      JSON.stringify(req.body),
-    ].join(" ");
-  }),
-);
+const generateID = () => {
+  return Math.floor(Math.random() * 10000);
+};
 
-app.get("/api/persons", (req, res) => {
-  res.json(persons);
+const isUniqueName = (name) => {
+  return persons.find((person) => person.name === name) === undefined;
+};
+
+app.get("/api/persons", (request, response) => {
+  response.send(persons);
 });
 
-app.get("/api/persons/:id", (req, res) => {
-  const person = persons.find((per) => per.id == req.params.id);
+app.post("/api/persons", (request, response) => {
+  if (!request.body.name) {
+    return response.status(400).json({
+      error: "name missing",
+    });
+  }
 
+  if (!request.body.number) {
+    return response.status(400).json({
+      error: "number missing",
+    });
+  }
+
+  if (isUniqueName(request.body.name)) {
+    const person = {
+      id: generateID(),
+      name: request.body.name,
+      number: request.body.number,
+    };
+    persons = persons.concat(person);
+    response.json(person);
+  } else {
+    return response.status(400).json({
+      error: "name must be unique",
+    });
+  }
+});
+
+app.get("/api/persons/:id", (request, response) => {
+  const id = Number(request.params.id);
+  const person = persons.find((person) => person.id === id);
   if (person) {
-    res.json(person);
+    response.json(person);
   } else {
-    res.status(404).end();
+    response.status(404).end();
   }
 });
 
-app.delete("/api/persons/:id", (req, res) => {
-  persons = persons.filter((person) => person.id != req.params.id);
-  res.status(204).end();
+app.delete("/api/persons/:id", (request, response) => {
+  const id = Number(request.params.id);
+  persons = persons.filter((person) => person.id !== id);
+  response.status(204).end();
 });
 
-app.post("/api/persons", (req, res) => {
-  const randomId = Math.floor(Math.random() * (9999999999 - 1 + 1)) + 1;
-
-  const newPerson = {
-    id: randomId,
-    name: req.body.name,
-    number: req.body.number,
-  };
-
-  if (!req.body.name || !req.body.name) {
-    res.status(400).json({
-      error: "Name and/or Number is missing",
-    });
-  }
-
-  if (persons.some((person) => person.name === req.body.name)) {
-    res.status(400).json({
-      error: `Phonebook already contains name: ${req.body.name}`,
-    });
-  } else {
-    persons.push(newPerson);
-    res.json(persons);
-  }
-});
-
-app.get("/info", (req, res) => {
-  const date = new Date(Date.now());
-
-  res.send(
-    `Phonebook has info for ${persons.length} people <br/> ${date.toString()}`,
+app.get("/info", (request, response) => {
+  response.send(
+    `<p>Phonebook has info for ${persons.length} people</p>
+    <p>${new Date()}</p>`,
   );
 });
 
-app.listen(3000, () => {
-  console.log(`Server running on port 3000`);
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
