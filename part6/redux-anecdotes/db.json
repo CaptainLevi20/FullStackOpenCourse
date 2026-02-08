@@ -1,0 +1,44 @@
+{
+  "anecdotes": [
+    {
+      "id": "a101",
+      "content": "Code is like humor. When you have to explain it, it’s bad.",
+      "votes": 3
+    },
+    {
+      "id": "b202",
+      "content": "First, solve the problem. Then, write the code.",
+      "votes": 5
+    },
+    {
+      "id": "c303",
+      "content": "Simplicity is the soul of efficiency.",
+      "votes": 2
+    },
+    {
+      "id": "d404",
+      "content": "Talk is cheap. Show me the code.",
+      "votes": 7
+    },
+    {
+      "id": "e505",
+      "content": "Programs must be written for people to read, and only incidentally for machines to execute.",
+      "votes": 1
+    },
+    {
+      "id": "f606",
+      "content": "Refactoring is like cleaning your room while still living in it.",
+      "votes": 4
+    },
+    {
+      "id": "g707",
+      "content": "Café primero, código después.",
+      "votes": 6
+    },
+    {
+      "id": "h808",
+      "content": "Hoy sí compila, mañana quién sabe.",
+      "votes": 0
+    }
+  ]
+}

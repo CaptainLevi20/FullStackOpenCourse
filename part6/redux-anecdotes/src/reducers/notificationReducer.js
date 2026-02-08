@@ -1,0 +1,32 @@
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = "Welcome to the anecdote application!";
+
+const notificationSlice = createSlice({
+  name: "notification",
+  initialState,
+  reducers: {
+    setNotification(state, action) {
+      return action.payload;
+    },
+
+    clearNotification() {
+      return "";
+    },
+  },
+});
+
+export const setNotificationWithTimeout = (message, seconds) => {
+  return (dispatch) => {
+    dispatch(setNotification(message));
+
+    setTimeout(() => {
+      dispatch(clearNotification());
+    }, seconds * 1000);
+  };
+};
+
+export const { setNotification, clearNotification } =
+  notificationSlice.actions;
+
+export default notificationSlice.reducer;

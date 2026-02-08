@@ -1,0 +1,54 @@
+{
+  "anecdotes": [
+    {
+      "content": "Code never lies, comments sometimes do.",
+      "id": "A1x93",
+      "votes": 3
+    },
+    {
+      "content": "Before software can be reusable it first has to be usable.",
+      "id": "B7K21",
+      "votes": 6
+    },
+    {
+      "content": "Walking on water and developing software from a specification are easy if both are frozen.",
+      "id": "C9M44",
+      "votes": 1
+    },
+    {
+      "content": "Simplicity is the soul of efficiency.",
+      "id": "D2P88",
+      "votes": 8
+    },
+    {
+      "content": "First, solve the problem. Then, write the code.",
+      "id": "E5Q10",
+      "votes": 4
+    },
+    {
+      "content": "Good code is its own best documentation.",
+      "id": "F8Z77",
+      "votes": 0
+    },
+    {
+      "content": "probando nueva anecdota",
+      "id": "gH3kP9",
+      "votes": 2
+    },
+    {
+      "content": "ejercicio 6.25 funcionando",
+      "id": "J9Lm20",
+      "votes": 11
+    },
+    {
+      "content": "refactorizando sin romper nada",
+      "id": "R2X8WQ",
+      "votes": 5
+    },
+    {
+      "content": "debug eterno a las 3am",
+      "id": "M4N7AA",
+      "votes": 9
+    }
+  ]
+}
