@@ -1,0 +1,50 @@
+{
+  "notes": [
+    {
+      "id": 1,
+      "content": "Aprendiendo JavaScript paso a paso"
+    },
+    {
+      "id": 2,
+      "content": "React es divertido y poderoso"
+    },
+    {
+      "id": 3,
+      "content": "Hacer ejercicio 5.4 completado"
+    },
+    {
+      "id": 4,
+      "content": "Planificar proyecto de fin de semana"
+    },
+    {
+      "id": 5,
+      "content": "Leer capítulo 3 del libro"
+    },
+    {
+      "id": 6,
+      "content": "Actualizar perfil en GitHub"
+    }
+  ],
+  "persons": [
+    {
+      "id": 1,
+      "name": "Sofía",
+      "number": "321-6549870"
+    },
+    {
+      "id": 2,
+      "name": "Carlos",
+      "number": "555-1234567"
+    },
+    {
+      "id": 3,
+      "name": "Lucía",
+      "number": "987-6543210"
+    },
+    {
+      "id": 4,
+      "name": "Andrés",
+      "number": "300-1112233"
+    }
+  ]
+}
